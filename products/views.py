@@ -24,7 +24,7 @@ class CreateCategoryView(generics.CreateAPIView):
 
 
 class ListCategoryView(generics.ListAPIView):
-    queryset = Category.objects.all()
+    queryset = Category.objects.all().order_by('name')
     serializer_class = CategorySerializer
     permission_classes = [permissions.AllowAny]
 
@@ -62,7 +62,7 @@ class CreateProductView(generics.CreateAPIView):
 
 
 class ListProductView(generics.ListAPIView):
-    queryset = Product.objects.all()
+    queryset = Product.objects.all().order_by('created_at')
     serializer_class = ProductSerializer
     permission_classes = [permissions.AllowAny]
 

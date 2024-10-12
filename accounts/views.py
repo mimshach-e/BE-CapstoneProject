@@ -3,14 +3,13 @@ from rest_framework import generics, views, permissions, status
 from django.contrib.auth import login, logout, authenticate
 from rest_framework.response import Response
 from .serializers import UserSerializer, LoginSerializer
-from rest_framework_simplejwt.authentication import JWTAuthentication
-from .models import User
+from .models import CustomUser
 
 
 
 # User Registration View: A view to register new users
 class UserRegistrationView(generics.CreateAPIView):
-    queryset = User.objects.all()
+    queryset = CustomUser.objects.all()
     serializer_class = UserSerializer
     permission_classes = [permissions.AllowAny]
 

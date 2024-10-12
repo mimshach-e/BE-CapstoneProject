@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from decimal import Decimal
 from .models import Category, Product, ProductImage, Rating, WishList, Discount
 from django.contrib.auth import get_user_model
 
@@ -9,7 +10,8 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = ['id', 'name', 'created_by', 'created_at'] 
-        read_only_fields = ['created_by', 'created_at']   
+        read_only_fields = ['created_by', 'created_at']  
+         
 
 # ProductImage Serializer
 class ProductImageSerializer(serializers.ModelSerializer):
@@ -39,7 +41,8 @@ class ProductSerializer(serializers.ModelSerializer):
         child=serializers.ImageField(max_length=10000000, allow_empty_file=False, use_url=False),
         write_only=True
         )
-
+    price = serializers.DecimalField(max_digits=10, decimal_places=2, min_value=Decimal('0.00'),
+                                     max_value=Decimal('1000000.00'))
     discounted_price = serializers.SerializerMethodField()
 
     class Meta:
