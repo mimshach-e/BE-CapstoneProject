@@ -14,6 +14,7 @@ import os
 from datetime import timedelta
 from pathlib import Path
 
+import dj_database_url
 import django_heroku
 from dotenv import load_dotenv
 
@@ -35,6 +36,9 @@ DEBUG = os.getenv('DEBUG') == 'True'
 
 ALLOWED_HOSTS = [
     'heroku-e-commerce-app-85cac8f4a57c.herokuapp.com', 'localhost', '127.0.0.1']
+
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS.append(os.environ.get('ALLOWED_HOST', ''))
 
 # Security settings
 SECURE_BROWSER_XSS_FILTER = True
@@ -158,6 +162,10 @@ DATABASES = {
         'PORT': os.getenv('DB_PORT', '5432'),
     }
 }
+
+# Heroku PostgreSQL database
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
 
 
 # Password validation
