@@ -10,26 +10,31 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
-from pathlib import Path
-from datetime import timedelta
-import django_heroku
 import os
+from datetime import timedelta
+from pathlib import Path
 
+import django_heroku
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Load environment variables from .env file
+load_dotenv()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-liej8t8(k$n!r1h_z=!(b-0*v1pcbep+kr000@kh58@2(ath^v'
+# SECRET_KEY = 'django-insecure-liej8t8(k$n!r1h_z=!(b-0*v1pcbep+kr000@kh58@2(ath^v'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.getenv('DEBUG') == 'True'
 
-ALLOWED_HOSTS = ['e-commerce-app.herokuapp.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['heroku-e-commerce-app.herokuapp.com',
+                 'localhost', '127.0.0.1']
 
 
 # Security settings
@@ -39,7 +44,6 @@ SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
-
 
 
 # Application definition

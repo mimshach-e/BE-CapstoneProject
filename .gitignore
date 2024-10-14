@@ -164,3 +164,4 @@ cython_debug/
 # Virtual Environment
 ven/
 product_images/
+.env
