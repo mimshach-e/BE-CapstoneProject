@@ -33,8 +33,8 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG') == 'True'
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
-ALLOWED_HOSTS.append(os.environ.get('ALLOWED_HOST', ''))
+ALLOWED_HOSTS = [
+    'heroku-e-commerce-app-85cac8f4a57c.herokuapp.com', 'localhost', '127.0.0.1']
 
 # Security settings
 SECURE_BROWSER_XSS_FILTER = True
