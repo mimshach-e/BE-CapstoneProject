@@ -28,11 +28,11 @@ load_dotenv()
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'django-insecure-liej8t8(k$n!r1h_z=!(b-0*v1pcbep+kr000@kh58@2(ath^v'
+
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG') == 'True'
+DEBUG = os.getenv('DEBUG') == False
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 ALLOWED_HOSTS.append(os.environ.get('ALLOWED_HOST', ''))
@@ -113,6 +113,7 @@ SWAGGER_SETTINGS = {
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
