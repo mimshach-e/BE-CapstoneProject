@@ -1,7 +1,7 @@
 # Importing modules, functions and classes
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
-from django.core.validators import MaxValueValidator, MinValueValidator
+from django.core.validators import MinValueValidator
 from django.db import models
 from django.utils import timezone
 
@@ -34,8 +34,13 @@ class Discount(models.Model):
     name = models.CharField(max_length=100)
     discount_type = models.CharField(
         max_length=15, choices=DISCOUNT_TYPE, default=PERCENTAGE)
-    value = models.DecimalField(max_digits=10, decimal_places=2, validators=[
-        MinValueValidator(0), MaxValueValidator(100 if discount_type == PERCENTAGE else 99999)])
+    value = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
+    def clean(self):
+        if self.discount_type == Discount.PERCENTAGE and (self.value < 0 or self.value > 100):
+            raise ValidationError("Discount percentage must be between 0 and 100")
+        elif self.discount_type == Discount.FIXED and self.value < 0:
+            raise ValidationError("Discount fixed amount cannot be negative")
+        super().clean()
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
     active = models.BooleanField(default=True)
