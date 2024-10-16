@@ -65,8 +65,7 @@ class Product(models.Model):
             self.stock_quantity -= quantity
             self.save()
         else:
-            raise ValidationError(f"Not enough stock. Available stock is {
-                                  self.stock_quantity}")
+            raise ValidationError(f"Not enough stock. Available stock is {self.stock_quantity}")
 
     # Discount Property
     @property
