@@ -15,8 +15,8 @@ from datetime import timedelta
 from pathlib import Path
 
 
-import dj_database_url
-import django_heroku
+# import dj_database_url
+# import django_heroku
 from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -35,8 +35,9 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'False').lower() != 'false'
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
-ALLOWED_HOSTS.append(os.environ.get('ALLOWED_HOST', ''))
+ALLOWED_HOST = []
+# ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+# ALLOWED_HOSTS.append(os.environ.get('ALLOWED_HOST', ''))
 
 # Security settings
 SECURE_BROWSER_XSS_FILTER = True
@@ -153,14 +154,21 @@ WSGI_APPLICATION = 'e_commerce_api.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default=os.getenv(
-            'DATABASE_URL', 'postgres://localhost/e_commerce_db'),
-        conn_max_age=600
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
 
-DATABASE_URL = os.getenv('DATABASE_URL', 'postgres://localhost/e_commerce_db')
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default=os.getenv(
+#             'DATABASE_URL', 'postgres://localhost/e_commerce_db'),
+#         conn_max_age=600
+#     )
+# }
+
+# DATABASE_URL = os.getenv('DATABASE_URL', 'postgres://localhost/e_commerce_db')
 
 
 # DATABASES = {
@@ -223,4 +231,4 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
