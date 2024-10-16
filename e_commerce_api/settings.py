@@ -153,7 +153,8 @@ WSGI_APPLICATION = 'e_commerce_api.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.getenv('DATABASE_URL', 'postgres://localhost/e_commerce_db')
+        default=os.getenv(
+            'DATABASE_URL', 'postgres://localhost/e_commerce_db'),
         conn_max_age=600
     )
 }
