@@ -26,7 +26,7 @@ class CreateCategoryView(generics.CreateAPIView):
 # List Category View
 
 class ListCategoryView(generics.ListAPIView):
-    queryset = Category.objects.all().order_by('name')
+    queryset = Category.objects.all().order_by('id')
     serializer_class = CategorySerializer
     permission_classes = [permissions.AllowAny]
 

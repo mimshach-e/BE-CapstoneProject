@@ -32,21 +32,21 @@ load_dotenv()
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', 'False').lower() != 'false'
+DEBUG = os.getenv('DEBUG', 'True').lower() != 'false'
 
-ALLOWED_HOST = []
+ALLOWED_HOSTS = ['.vercel.app']
 # ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 # ALLOWED_HOSTS.append(os.environ.get('ALLOWED_HOST', ''))
 
 # Security settings
-SECURE_BROWSER_XSS_FILTER = True
-X_FRAME_OPTIONS = 'DENY'
-SECURE_CONTENT_TYPE_NOSNIFF = True
+# SECURE_BROWSER_XSS_FILTER = True
+# X_FRAME_OPTIONS = 'DENY'
+# SECURE_CONTENT_TYPE_NOSNIFF = True
 
-if not DEBUG:
-    SECURE_SSL_REDIRECT = True
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
+# if not DEBUG:
+#     SECURE_SSL_REDIRECT = True
+#     SESSION_COOKIE_SECURE = True
+#     CSRF_COOKIE_SECURE = True
 
 
 # Application definition
