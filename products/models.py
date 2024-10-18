@@ -11,7 +11,7 @@ User = get_user_model()
 
 class Category(models.Model):
     name = models.CharField(max_length=255, unique=True,
-                            null=False, blank=False, default=True)
+                            null=False, blank=False)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
